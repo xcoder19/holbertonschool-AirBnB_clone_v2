@@ -350,7 +350,7 @@ class HBNBCommand(cmd.Cmd):
      
      for i in string:
         if (i == '_'):
-            newstring = string.replace('_','.')
+            newstring = string.replace('_',' ')
      return newstring
 
 if __name__ == "__main__":
