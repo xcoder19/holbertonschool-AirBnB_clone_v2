@@ -53,7 +53,7 @@ class FileStorage:
         """delete obj from __objects"""
         if obj is None:
             return
-        self.__objects.pop(obj)
+        self.__objects.pop(f"{obj.to_dict()['__class__'] + '.' + obj.id}")
         
         
 
