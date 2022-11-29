@@ -35,11 +35,13 @@ def number(n):
         return "{} is a number".format(n)
     return "", 404
 
+
 @app.route("/number_template/<n>", strict_slashes=False)
 def number_template(n):
     if n.isnumeric():
-        return render_template("5-number.html", data = n)
+        return render_template("5-number.html", data=n)
     return "", 404
+
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000)
