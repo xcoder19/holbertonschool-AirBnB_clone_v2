@@ -50,7 +50,7 @@ def odd_even(n):
             return render_template(
                 "6-number_odd_or_even.html",
                 data="{} is even".format(n))
-        return render_template("6-number_odd_or_even.html", data=f"{n} is odd")
+        return render_template("6-number_odd_or_even.html", data="{} is odd".format(n))
     return "", 404
 
 
