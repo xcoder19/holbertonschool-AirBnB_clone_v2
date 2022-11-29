@@ -7,31 +7,31 @@ from flask import Flask
 """ app instance """
 app = Flask(__name__)
 
-"""/ route"""
+"""home route"""
 
 
 @app.route("/", strict_slashes=False)
 def hello_hbnb():
-    """/ route"""
+    """home route"""
 
     return "Hello HBNB!"
 
 
-"""/hbnb route"""
+"""hbnb route"""
 
 
 @app.route("/hbnb", strict_slashes=False)
 def hbnb():
-    """/hbnb route"""
+    """hbnb route"""
     return "HBNB"
 
 
-"""c_is func route """
+"""c_is fun route """
 
 
 @app.route("/c/<text>", strict_slashes=False)
 def c_isfun(text):
-    """c_is func route """
+    """c_is fun route """
     text = text.replace("_", " ")
     return f"C{text}"
 
