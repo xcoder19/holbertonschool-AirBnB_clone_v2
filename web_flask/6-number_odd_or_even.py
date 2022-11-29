@@ -49,7 +49,7 @@ def odd_even(n):
         if int(n) % 2 == 0:
             return render_template(
                 "6-number_odd_or_even.html",
-                data=f"{n} is even")
+                data="{} is even".format(n))
         return render_template("6-number_odd_or_even.html", data=f"{n} is odd")
     return "", 404
 
