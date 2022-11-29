@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """
-flask app
-
+Flask instance
 """
 
 from flask import Flask
