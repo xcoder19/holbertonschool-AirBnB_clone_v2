@@ -65,7 +65,8 @@ class FileStorage:
             return
         self.__objects.pop(f"{obj.to_dict()['__class__'] + '.' + obj.id}")
         
-        
+    def close(self):
+        self.reload()
 
 
 
