@@ -33,7 +33,7 @@ def python(text="is cool"):
 def number(n):
     if n.isnumeric():
         return "{} is a number".format(n)
-
+    return 500
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000)
