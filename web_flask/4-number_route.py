@@ -31,7 +31,7 @@ def python(text="is cool"):
 
 @app.route("/number/<n>", strict_slashes=False)
 def number(n):
-    if isinstance(n, int):
+    if n.isnumeric():
         return "{} is a number".format(n)
 
 
