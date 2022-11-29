@@ -10,12 +10,12 @@ app = Flask(__name__)
 def hello_hbnb():
     return "Hello HBNB!"
 
-
+"""/hbnb route"""
 @app.route("/hbnb", strict_slashes=False)
 def hbnb():
     return "HBNB"
 
-
+"""/c route"""
 @app.route("/c/<text>", strict_slashes=False)
 def c_isfun(text):
     text = text.replace("_", " ")
