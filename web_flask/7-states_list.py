@@ -5,25 +5,25 @@
 from flask import Flask
 from flask import render_template
 from models import storage
-from models.state import State
 app = Flask(__name__)
 
 
 @app.teardown_appcontext
-def teardown(exception):
+def handle_teardown(self):
     """
-        close storage
+        storage close
     """
     storage.close()
 
 
-@app.route("/states_list", strict_slashes=False)
-def states_list():
+@app.route('/states_list', strict_slashes=False)
+def state_list():
     """
-        return list of states
+        state_list route
     """
-    return render_template("7-states_list.html", data=storage.all(State))
+    data = storage.all("State")
+    return render_template("7-states_list.html", data=data)
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host='0.0.0.0', port=5000)
