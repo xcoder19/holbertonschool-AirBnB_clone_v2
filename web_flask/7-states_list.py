@@ -24,9 +24,10 @@ def state_list():
         state_list route
     """
     from models import storage
+    from models.state import State
     return render_template(
         "7-states_list.html",
-        states=storage.all("State").values())
+        states=storage.all(State).values())
 
 
 if __name__ == '__main__':
