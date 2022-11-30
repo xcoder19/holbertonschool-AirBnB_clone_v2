@@ -21,8 +21,10 @@ def state_list():
     """
         state_list route
     """
-    states = storage.all("State").values()
-    return render_template("7-states_list.html", states=states)
+
+    return render_template(
+        "7-states_list.html",
+        states=storage.all("State").values())
 
 
 if __name__ == '__main__':
