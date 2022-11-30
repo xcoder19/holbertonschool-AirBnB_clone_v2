@@ -4,7 +4,8 @@
 """
 from flask import Flask
 from flask import render_template
-from models import storage
+
+
 app = Flask(__name__)
 
 
@@ -13,6 +14,7 @@ def handle_teardown(self):
     """
         storage close
     """
+    from models import storage
     storage.close()
 
 
@@ -21,7 +23,7 @@ def state_list():
     """
         state_list route
     """
-
+    from models import storage
     return render_template(
         "7-states_list.html",
         states=storage.all("State").values())
