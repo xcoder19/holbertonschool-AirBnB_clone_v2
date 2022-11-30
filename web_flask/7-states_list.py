@@ -7,17 +7,14 @@ from models.state import State
 app = Flask(__name__)
 
 
-@app.route("/states_list", strict_slashes=False)
-def states_list():
-    """ return States """
-    data = storage.all(State)
-    return render_template("7-states_list.html", data=data)
-
-
 @app.teardown_appcontext
 def teardown(exception):
-    """ close storage """
     storage.close()
+
+
+@app.route("/states_list", strict_slashes=False)
+def states_list():
+    return render_template("7-states_list.html", data=storage.all(State))
 
 
 if __name__ == '__main__':
