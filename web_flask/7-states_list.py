@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-""" flask app """
+"""
+    flask app
+"""
 from flask import Flask
 from flask import render_template
 from models import storage
@@ -10,7 +12,7 @@ app = Flask(__name__)
 @app.teardown_appcontext
 def teardown(exception):
     """
-    close storage
+        close storage
     """
     storage.close()
 
@@ -18,7 +20,7 @@ def teardown(exception):
 @app.route("/states_list", strict_slashes=False)
 def states_list():
     """
-    return list of states
+        return list of states
     """
     return render_template("7-states_list.html", data=storage.all(State))
 
