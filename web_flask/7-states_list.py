@@ -9,15 +9,6 @@ from flask import render_template
 app = Flask(__name__)
 
 
-@app.teardown_appcontext
-def teardown(exception):
-    """
-        storage close
-    """
-    from models import storage
-    storage.close()
-
-
 @app.route("/states_list", strict_slashes=False)
 def states_list():
     """
@@ -29,6 +20,15 @@ def states_list():
     return render_template(
         "7-states_list.html",
         states=states), 200
+
+
+@app.teardown_appcontext
+def teardown(exception):
+    """
+        storage close
+    """
+    from models import storage
+    storage.close()
 
 
 if __name__ == '__main__':
