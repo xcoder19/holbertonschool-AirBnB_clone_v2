@@ -27,7 +27,7 @@ def state_list():
     from models.state import State
     return render_template(
         "7-states_list.html",
-        states=storage.all(State).values())
+        states=storage.all(State).values()), 200
 
 
 if __name__ == '__main__':
