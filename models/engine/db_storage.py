@@ -13,7 +13,8 @@ class DBStorage:
 
     def __init__(self):
         self.__engine = create_engine(
-            f"mysql+pymysql://{self.user}:{self.password}@localhost/{self.database}",
+            u = "@localhost/"
+            f"mysql+pymysql://{self.user}:{self.password}u{self.database}",
             connect_args=dict(
                 host='localhost'),
             pool_pre_ping=True)
