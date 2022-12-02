@@ -14,7 +14,7 @@ class BaseModel:
             """Instatntiates a new model"""
             
                                        
-            del kwargs['__class__']
+           
             self.__dict__.update(kwargs)
 
     def __str__(self):
