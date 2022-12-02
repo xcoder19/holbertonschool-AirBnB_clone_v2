@@ -3,8 +3,7 @@
 from models.base_model import BaseModel
 from sqlalchemy import *
 
-class State(BaseModel, Base):
+class State(BaseModel):
     """ State class """
     __tablename__ = "states"
     name = Column(String(128),nullable = False)
-    
