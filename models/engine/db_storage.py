@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+import sqlalchemy
+
+from sqlalchemy import create_engine
+from sqlalchemy import MetaData
 from sqlalchemy import *
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import scoped_session
