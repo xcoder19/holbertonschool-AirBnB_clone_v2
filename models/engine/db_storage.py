@@ -13,12 +13,11 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
+url = 'mysql+mysqldb://{}:{}@{}:3309/{}'
 user = getenv('HBNB_MYSQL_USER')
-password = getenv('HBNB_MYSQL_PWD')
+pwd = getenv('HBNB_MYSQL_PWD')
 host = getenv('HBNB_MYSQL_HOST')
 database = getenv('HBNB_MYSQL_DB')
-port = "3000"
-url = "mysql+mysqldb://{}:{}@{}/{}"
 
 
 class DBStorage:
@@ -29,11 +28,11 @@ class DBStorage:
     def __init__(self):
         self.__engine = create_engine(
             url.format(
-                "hbnb_dev",
-                "hbnb_dev_pwd",
-                "localhost",
+                user,
+                pwd,
+                host,
                 
-                "hbnb_dev_db"),
+               database),
             pool_pre_ping=True)
 
         if getenv("HBNB_ENV") == "test":
