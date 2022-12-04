@@ -13,7 +13,7 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
-url = 'mysql+mysqldb://{}:{}@{}:3309/{}'
+url = 'mysql+mysqldb://{}:{}@{}:3306/{}'
 user = getenv('HBNB_MYSQL_USER')
 pwd = getenv('HBNB_MYSQL_PWD')
 host = getenv('HBNB_MYSQL_HOST')
