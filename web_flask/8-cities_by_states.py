@@ -1,16 +1,17 @@
 #!/usr/bin/python3
 """flask app"""
-from models import storage
-from models.state import State
-from models.city import City
-from flask import Flask, render_template
 
+
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
 
 @app.route("/cities_by_states", strict_slashes=False)
 def cities_by_states():
+    from models import storage
+    from models.state import State
+    from models.city import City
     list_state = []
     state_dict = storage.all(State)
     for k, v in state_dict.items():
@@ -26,6 +27,9 @@ def cities_by_states():
 
 @app.teardown_appcontext
 def teardown(exception):
+    from models import storage
+    from models.state import State
+    from models.city import City
     storage.close()
 
 
