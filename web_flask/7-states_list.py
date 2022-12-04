@@ -19,7 +19,7 @@ def states_list():
     states = list(storage.all(State).values())
     return render_template(
         "7-states_list.html",
-        states=states), 200
+        states=states)
 
 
 @app.teardown_appcontext
