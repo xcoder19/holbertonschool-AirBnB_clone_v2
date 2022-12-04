@@ -31,8 +31,8 @@ class DBStorage:
                 user,
                 pwd,
                 host,
-                
-               database),
+
+                database),
             pool_pre_ping=True)
 
         if getenv("HBNB_ENV") == "test":
@@ -45,17 +45,16 @@ class DBStorage:
             query_result = self.__session.query(cls).all()
             for i in query_result:
                 key = "{}.{}".format(type(i).__name__, i.id)
-                dict.update({key:i})
+                dict.update({key: i})
         else:
 
             objs = [State, City, User, Place, Review]
-            
+
             for obj in objs:
                 query_result = self.__session.query(obj)
                 for i in query_result:
                     key = "{}.{}".format(type(i).__name__, i.id)
-                    dict.update({key:i})
-                    
+                    dict.update({key: i})
 
         return dict
 
@@ -67,15 +66,14 @@ class DBStorage:
 
     def delete(self, obj=None):
         if obj is not None:
-           self.__session.delete(obj)
+            self.__session.delete(obj)
 
     def reload(self):
         self.__session = Base.metadata.create_all(self.__engine)
-        session_making = sessionmaker(bind=self.__engine, expire_on_commit=False)
+        session_making = sessionmaker(
+            bind=self.__engine, expire_on_commit=False)
         scoped_s = scoped_session(session_making)
         self.__session = scoped_s()
 
-    
     def close(self):
         self.__session.close()
-        
