@@ -13,7 +13,7 @@ user = getenv('HBNB_MYSQL_USER')
 password = getenv('HBNB_MYSQL_PWD')
 host = getenv('HBNB_MYSQL_HOST')
 database = getenv('HBNB_MYSQL_DB')
-port = ""
+port = "3000"
 url = "mysql+mysqldb://{}:{}@{}:{}/{}"
 
 
