@@ -25,11 +25,11 @@ class DBStorage:
     def __init__(self):
         self.__engine = create_engine(
             url.format(
-                user,
-                password,
-                host,
+                "hbnb_dev",
+                "hbnb_dev_pwd",
+                "localhost",
                 
-                database),
+                "hbnb_dev_db"),
             pool_pre_ping=True)
 
         if getenv("HBNB_ENV") == "test":
