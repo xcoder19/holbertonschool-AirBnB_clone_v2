@@ -14,7 +14,7 @@ password = getenv('HBNB_MYSQL_PWD')
 host = getenv('HBNB_MYSQL_HOST')
 database = getenv('HBNB_MYSQL_DB')
 port = "3000"
-url = "mysql+mysqldb://{}:{}@{}:{}/{}"
+url = "mysql+mysqldb://{}:{}@{}/{}"
 
 
 class DBStorage:
@@ -28,7 +28,7 @@ class DBStorage:
                 user,
                 password,
                 host,
-                port,
+                
                 database),
             pool_pre_ping=True)
 
