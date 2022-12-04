@@ -5,5 +5,8 @@ flask app
 from flask import Flask
 
 app = Flask(__name__)
-from models import storage
-storage.all()
+try:
+    from models import storage
+    storage.all()
+except ModuleNotFoundError:
+    pass
