@@ -1,79 +1,74 @@
 #!/usr/bin/python3
-import sqlalchemy
+"""DBStorage"""
 
-from sqlalchemy import create_engine
-from sqlalchemy import MetaData
-from sqlalchemy import *
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.orm import scoped_session
-from os import getenv
-from models.base_model import Base
+import models
+from models.amenity import Amenity
+from models.base_model import BaseModel, Base
 from models.city import City
 from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
-url = 'mysql+mysqldb://{}:{}@{}:3309/{}'
-user = getenv('HBNB_MYSQL_USER')
-pwd = getenv('HBNB_MYSQL_PWD')
-host = getenv('HBNB_MYSQL_HOST')
-database = getenv('HBNB_MYSQL_DB')
+from os import getenv
+import sqlalchemy
+from sqlalchemy import create_engine
+from sqlalchemy.orm import scoped_session, sessionmaker
+
+classes = {"Amenity": Amenity, "City": City,
+           "Place": Place, "Review": Review, "State": State, "User": User}
 
 
 class DBStorage:
-    """DB storage engine"""
+    """create a connection to sql database"""
     __engine = None
     __session = None
 
     def __init__(self):
-        self.__engine = create_engine(
-            url.format(
-                user,
-                pwd,
-                host,
-
-                database),
-            pool_pre_ping=True)
-
-        if getenv("HBNB_ENV") == "test":
-            Base.metadata.drop_all(bind=self.__engine)
+        """init"""
+        HBNB_MYSQL_USER = getenv('HBNB_MYSQL_USER')
+        HBNB_MYSQL_PWD = getenv('HBNB_MYSQL_PWD')
+        HBNB_MYSQL_HOST = getenv('HBNB_MYSQL_HOST')
+        HBNB_MYSQL_DB = getenv('HBNB_MYSQL_DB')
+        HBNB_ENV = getenv('HBNB_ENV')
+        self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.
+                                      format(HBNB_MYSQL_USER,
+                                             HBNB_MYSQL_PWD,
+                                             HBNB_MYSQL_HOST,
+                                             HBNB_MYSQL_DB))
+        if HBNB_ENV == "test":
+            Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
-        dict = {}
-
-        if cls is not None:
-            query_result = self.__session.query(cls).all()
-            for i in query_result:
-                key = "{}.{}".format(type(i).__name__, i.id)
-                dict.update({key: i})
-        else:
-
-            objs = [State, City, User, Place, Review]
-
-            for obj in objs:
-                query_result = self.__session.query(obj)
-                for i in query_result:
-                    key = "{}.{}".format(type(i).__name__, i.id)
-                    dict.update({key: i})
-
-        return dict
+        """all method"""
+        new_dict = {}
+        for clss in classes:
+            if cls is None or cls is classes[clss] or cls is clss:
+                objs = self.__session.query(classes[clss]).all()
+                for obj in objs:
+                    key = obj.__class__.__name__ + '.' + obj.id
+                    new_dict[key] = obj
+        return (new_dict)
 
     def new(self, obj):
+        """new"""
         self.__session.add(obj)
 
     def save(self):
+        """save"""
         self.__session.commit()
 
     def delete(self, obj=None):
+        """delete"""
         if obj is not None:
             self.__session.delete(obj)
 
     def reload(self):
-        self.__session = Base.metadata.create_all(self.__engine)
-        session_making = sessionmaker(
-            bind=self.__engine, expire_on_commit=False)
-        scoped_s = scoped_session(session_making)
-        self.__session = scoped_s()
+        """reload"""
+        Base.metadata.create_all(self.__engine)
+        sess_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
+        Session = scoped_session(sess_factory)
+        self.__session = Session
 
     def close(self):
+        """close connection to sql database"""
         self.__session.remove()
