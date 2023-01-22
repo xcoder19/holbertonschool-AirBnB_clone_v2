@@ -16,8 +16,8 @@ class HBNBCommand(cmd.Cmd):
     """HBNBCommand"""
     prompt = "(hbnb) "
     classes = {"BaseModel": BaseModel, "User": User, "State": State,
-                   "City": City, "Amenity": Amenity,
-                   "Place": Place, "Review": Review}
+               "City": City, "Amenity": Amenity,
+               "Place": Place, "Review": Review}
 
     def emptyline(self):
         """emptyline"""
@@ -36,11 +36,11 @@ class HBNBCommand(cmd.Cmd):
         try:
             if not line:
                 raise SyntaxError()
-            my_list = line.split(" ") 
+            my_list = line.split(" ")
 
-            if my_list:  
-                cls_name = my_list[0]  
-            else:  
+            if my_list:
+                cls_name = my_list[0]
+            else:
                 raise SyntaxError()
 
             kwargs = {}
@@ -56,9 +56,9 @@ class HBNBCommand(cmd.Cmd):
                     kwargs[k] = v.strip('"\'')
 
             obj = self.classes[cls_name](**kwargs)
-            storage.new(obj)  
-            obj.save() 
-            print(obj.id)  
+            storage.new(obj)
+            obj.save()
+            print(obj.id)
 
         except SyntaxError:
             print("** class name missing **")
@@ -113,7 +113,7 @@ class HBNBCommand(cmd.Cmd):
         key = c_name + "." + c_id
 
         try:
-            del(storage.all()[key])
+            del (storage.all()[key])
             storage.save()
         except KeyError:
             print("** no instance found **")
@@ -171,7 +171,8 @@ class HBNBCommand(cmd.Cmd):
             return
 
         # first determine if kwargs or args
-        if '{' in args[2] and '}' in args[2] and type(eval(args[2])) is dict:
+        if '{' in args[2] and '}' in args[2] and isinstance(
+                eval(args[2]), dict):
             kwargs = eval(args[2])
             args = []  # reformat kwargs into list, ex: [<name>, <value>, ...]
             for k, v in kwargs.items():
@@ -222,7 +223,6 @@ class HBNBCommand(cmd.Cmd):
 
         new_dict.save()  # save updates to file
 
-    
     @staticmethod
     def is_int(n):
         """is_int"""
@@ -240,6 +240,7 @@ class HBNBCommand(cmd.Cmd):
             return True
         except ValueError:
             return False
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
